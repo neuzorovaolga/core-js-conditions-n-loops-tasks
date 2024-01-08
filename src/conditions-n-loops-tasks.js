@@ -197,10 +197,8 @@ function convertNumberToString(numberStr) {
       case '.':
       case ',':
         return 'point';
-
       case '-':
         return 'minus';
-
       default:
         return numNames[Number(value)];
     }
@@ -417,27 +415,6 @@ function shuffleChar(/* str, iterations */) {
 
 function getNearestBigger(/* num */) {
   throw new Error('Not implemented');
-
-  // const arr = String(num).split('').map(Number);
-
-  // let replaceValue;
-  // const maxArray = [];
-  // for (let i = arr.length - 1; i > 0; i -= 1) {
-  //   if (arr[i] <= arr[i - 1]) {
-  //     maxArray.push(arr.pop());
-  //   } else {
-  //     maxArray.push(arr.pop());
-  //     replaceValue = arr.pop();
-  //     break;
-  //   }
-  // }
-  // if (!replaceValue) return -1;
-  // const currentValue = maxArray.filter((item) => item > replaceValue).sort()[0];
-  // const indexValue = maxArray.indexOf(currentValue);
-  // arr.push(currentValue);
-  // maxArray.splice(indexValue, 1, replaceValue);
-  // const result = arr.concat(maxArray);
-  // return +result.join('');
 }
 
 module.exports = {
