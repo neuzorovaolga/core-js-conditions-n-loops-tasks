@@ -325,8 +325,96 @@ function getBalanceIndex(/* arr */) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  let count = 1;
+  let indexX = 0;
+  let indexY = 0;
+  const end = size * size;
+  const matrix = [];
+
+  for (let i = 0; i < size; i += 1) {
+    const lineArray = [];
+    for (let j = 0; j < size; j += 1) {
+      lineArray[j] = 0;
+    }
+    matrix[i] = lineArray;
+  }
+
+  function checkStep() {
+    if (count <= end) {
+      const nextCount = count + 1;
+      matrix[indexY][indexX] = count;
+      count = nextCount;
+      return true;
+    }
+    return false;
+  }
+
+  function nextStep(step) {
+    switch (step) {
+      case 'right':
+        if (checkStep()) {
+          if (matrix[indexY][indexX + 1] === 0) {
+            const nextIndexX = indexX + 1;
+            indexX = nextIndexX;
+            nextStep('right');
+          } else {
+            const nextIndexY = indexY + 1;
+            indexY = nextIndexY;
+            nextStep('down');
+          }
+        }
+        break;
+
+      case 'down':
+        if (checkStep()) {
+          if (matrix[indexY + 1] && matrix[indexY + 1][indexX] === 0) {
+            const nextIndexY = indexY + 1;
+            indexY = nextIndexY;
+            nextStep('down');
+          } else {
+            const nextIndexX = indexX - 1;
+            indexX = nextIndexX;
+            nextStep('left');
+          }
+        }
+        break;
+
+      case 'left':
+        if (checkStep()) {
+          if (matrix[indexY][indexX - 1] === 0) {
+            const nextIndexX = indexX - 1;
+            indexX = nextIndexX;
+            nextStep('left');
+          } else {
+            const nextIndexY = indexY - 1;
+            indexY = nextIndexY;
+            nextStep('up');
+          }
+        }
+        break;
+
+      case 'up':
+        if (checkStep()) {
+          if (matrix[indexY - 1] && matrix[indexY - 1]?.[indexX] === 0) {
+            const nextIndexY = indexY - 1;
+            indexY = nextIndexY;
+            nextStep('up');
+          } else {
+            const nextIndexX = indexX + 1;
+            indexX = nextIndexX;
+            nextStep('right');
+          }
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  nextStep('right');
+  return matrix;
 }
 
 /**
